@@ -65,5 +65,4 @@ func Ema(data *[]datastruct.Tickerdata) {
 			}
 		}
 	}
-	// return data
 }

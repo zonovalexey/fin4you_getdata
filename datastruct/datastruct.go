@@ -64,13 +64,17 @@ type Yahoofinancestruct struct {
 }
 
 type Tickerdata struct {
-	Date   int64
-	Open   float64
-	Close  float64
-	Ema5   float64
-	Ema20  float64
-	Ema65  float64
-	Ema99  float64
-	Ema140 float64
-	Ema200 float64
+	Date       int64
+	Open       float64
+	Close      float64
+	Ema5       float64
+	Ema20      float64
+	Ema65      float64
+	Ema99      float64
+	Ema140     float64
+	Ema200     float64
+	Indicators struct {
+		EmaBuy  bool
+		EmaSell bool
+	}
 }

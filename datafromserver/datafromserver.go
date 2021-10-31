@@ -3,15 +3,16 @@ package datafromserver
 import (
 	"encoding/json"
 	"fmt"
+	"getdata/datastruct"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
 )
 
-func server_get_api_struct(tickername string, interval string) []tickerdata {
+func server_get_api_struct(tickername string, interval string) []datastruct.Tickerdata {
 
-	var data yahoofinancestruct
+	var data datastruct.Yahoofinancestruct
 
 	datestart := time.Now().Unix() - 50*365*24*60*60
 	dateend := time.Now().Unix()
@@ -41,14 +42,14 @@ func server_get_api_struct(tickername string, interval string) []tickerdata {
 		log.Fatal(err)
 	}
 
-	var data_struct []tickerdata
+	var data_struct []datastruct.Tickerdata
 
 	for i, res := range data.Chart.Result {
 		if i == 0 {
 			for k, quote := range res.Indicators.Quote {
 				if k == 0 {
 					for t := 0; t < len(quote.Open); t++ {
-						data_struct = append(data_struct, tickerdata{date: res.Timestamp[t], open: quote.Open[t], close: quote.Close[t]})
+						data_struct = append(data_struct, datastruct.Tickerdata{Date: res.Timestamp[t], Open: quote.Open[t], Close: quote.Close[t]})
 					}
 				}
 			}
