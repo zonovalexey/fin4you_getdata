@@ -65,4 +65,43 @@ func Ema(data *[]datastruct.Tickerdata) {
 			}
 		}
 	}
+
+	for i := range *data {
+		if i > 0 {
+			if (*data)[i-1].Ema200 > 0 {
+				if !((*data)[i-1].Ema20 < (*data)[i-1].Ema65 && (*data)[i-1].Ema65 < (*data)[i-1].Ema99 &&
+					(*data)[i-1].Ema99 < (*data)[i-1].Ema140 /* && (*data)[i-1].Ema140 < (*data)[i-1].Ema200*/) {
+					if (*data)[i].Ema20 < (*data)[i].Ema65 && (*data)[i].Ema65 < (*data)[i].Ema99 &&
+						(*data)[i].Ema99 < (*data)[i].Ema140 /*  && (*data)[i].Ema140 < (*data)[i].Ema200*/ {
+						(*data)[i].Indicators.EmaSell = true
+					}
+				}
+
+				if !((*data)[i-1].Ema20 > (*data)[i-1].Ema65 && (*data)[i-1].Ema65 > (*data)[i-1].Ema99 &&
+					(*data)[i-1].Ema99 > (*data)[i-1].Ema140 && (*data)[i-1].Ema140 > (*data)[i-1].Ema200) {
+					if (*data)[i].Ema20 > (*data)[i].Ema65 && (*data)[i].Ema65 > (*data)[i].Ema99 &&
+						(*data)[i].Ema99 > (*data)[i].Ema140 && (*data)[i].Ema140 > (*data)[i].Ema200 {
+						(*data)[i].Indicators.EmaBuy = true
+					}
+				}
+
+			}
+			if (*data)[i-1].Ema65 > 0 {
+				if (*data)[i-1].Close < (*data)[i-1].Ema65 && (*data)[i].Close > (*data)[i].Ema65 {
+					(*data)[i].Indicators.Ema65CloseBuy = true
+				}
+				if (*data)[i-1].Close > (*data)[i-1].Ema65 && (*data)[i].Close < (*data)[i].Ema65 {
+					(*data)[i].Indicators.Ema65CloseSell = true
+				}
+			}
+			if (*data)[i-1].Ema65 > 0 {
+				if (*data)[i-1].Ema20 < (*data)[i-1].Ema65 && (*data)[i].Ema20 > (*data)[i].Ema65 {
+					(*data)[i].Indicators.Ema2065CrossBuy = true
+				}
+				if (*data)[i-1].Ema20 > (*data)[i-1].Ema65 && (*data)[i].Ema20 < (*data)[i].Ema65 {
+					(*data)[i].Indicators.Ema2065CrossSell = true
+				}
+			}
+		}
+	}
 }

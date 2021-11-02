@@ -74,7 +74,11 @@ type Tickerdata struct {
 	Ema140     float64
 	Ema200     float64
 	Indicators struct {
-		EmaBuy  bool
-		EmaSell bool
+		EmaBuy           bool
+		EmaSell          bool
+		Ema65CloseBuy    bool
+		Ema65CloseSell   bool
+		Ema2065CrossBuy  bool
+		Ema2065CrossSell bool
 	}
 }
